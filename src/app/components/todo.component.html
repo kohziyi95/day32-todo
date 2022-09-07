@@ -1,0 +1,69 @@
+<div class="box-it">
+  <form [formGroup]="form" (ngSubmit)="processForm()">
+    <div>
+      <label for="name"></label>
+      <input
+        type="text"
+        id="name"
+        size="30"
+        placeholder="Your name"
+        formControlName="name"
+      />
+      <span *ngIf="hasError('name')" class="notice">
+        Please enter your name</span
+      >
+    </div>
+    <div>
+      <label for="email"></label>
+      <input
+        type="text"
+        id="email"
+        size="30"
+        placeholder="Your email"
+        formControlName="email"
+      />
+      <span *ngIf="hasError('email')" class="notice">
+        Please enter your email</span
+      >
+    </div>
+    <div>
+      <p>Name has error: {{ form.get("name")!.hasError("required") }}</p>
+      <p>Email has error: {{ form.get("email")!.hasError("required") }}</p>
+    </div>
+    <div class="box-it no-border">
+      <!-- <button type="submit" [disabled]="form.invalid">Save</button>
+      -->
+        <ng-content></ng-content>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Priority</th>
+          <th><button type="button" (click)="addTodo()">Add</button> </th>
+        </tr>
+      </thead>
+      <tbody formArrayName="todos">
+        <tr *ngFor="let t of todoArrayCtrl.controls; let idx = index" [formGroup]="t">
+          <td>
+            <input type="text" value="Jog" formControlName="task"/>
+          </td>
+          <td>
+            <select formControlName="priority">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </td>
+          <td>
+            <button type="button" (click)=delete(idx)>X</button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </form>
+</div>

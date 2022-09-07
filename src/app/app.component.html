@@ -1,0 +1,9 @@
+<h1>Todo</h1>
+
+<app-todo #todo>
+  <div (click)="saveTodo()">
+    <button type="button" [disabled]="todoComp?.invalid">Save</button>
+    <button type="button">Update</button>
+    <button type="button">Delete</button>
+  </div>
+</app-todo>
